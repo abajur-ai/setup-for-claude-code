@@ -1,0 +1,94 @@
+[Leia em português](README.pt-BR.md)
+
+# Setup for Claude Code
+
+An executable runbook that turns a fresh Claude Code install into a fully equipped one.
+
+You hand the file to Claude Code and it audits the machine, installs only what is missing, offers a menu
+of connections and working methods, writes a global instruction file, and records what it did as
+persistent memories. Everything it installs is global, valid in every project and every future session.
+
+## Use it
+
+Starting from zero takes five steps. Already have Claude Code open and signed in? Go straight to
+step 5.
+
+1. **Install VS Code.** Download it from [code.visualstudio.com](https://code.visualstudio.com/download)
+   and install it with the default options.
+2. **Add Claude Code to VS Code.** In VS Code, open the Extensions view (`Ctrl+Shift+X` on Windows,
+   `Cmd+Shift+X` on macOS), search for **Claude Code**, and install the one published by
+   **Anthropic**.
+3. **Get a paid Claude plan.** Create your account at [claude.ai](https://claude.ai) and subscribe to
+   Pro or Max. Claude Code does not run on the free plan.
+4. **Sign in.** Click the Claude Code icon, a spark, in the bar on the left side of VS Code, and start
+   a new conversation. The first time, a sign-in screen appears: click **Sign in** and approve it in
+   the browser with the account from step 3.
+5. **Run the setup.** Copy the message below, paste it into Claude Code, and press Enter:
+
+   ```text
+   Set up my Claude Code by following the setup-for-claude-code.md runbook in this repository: https://github.com/abajur-ai/setup-for-claude-code
+   ```
+
+Prefer the file? Download [`setup-for-claude-code.md`](setup-for-claude-code.md),
+drag it into the conversation, and say "run this setup".
+
+Answer the questions and nothing else. The runbook asks for numbers, not sentences. Nothing is installed
+without confirmation, and every item can be added later.
+
+It speaks the language you write in. The runbook itself is written in American English, and the
+conversation follows you.
+
+## What it does
+
+**Audits before touching anything.** Every component has three possible states, and each gets different
+treatment: absent means install, present and current means leave it alone, present and outdated means
+propose an upgrade in place. It never installs over a working version and never reinstalls to "fix"
+something.
+
+**Installs the base only if it is missing.** Node.js, Git, Python, uv, Docker Desktop,
+VS Code. Always from the vendor's current official source, never a bundled installer. When
+something you asked for turns out to need a piece your machine does not have, it installs that
+piece and finishes the job instead of skipping the item.
+
+**Offers 19 optional items in one menu**, in three groups, answered in a single reply:
+
+| Group | What it covers |
+|-------|----------------|
+| Connections, 1 to 9 | Browser automation, Google Workspace, Docker, GitHub, Railway, Supabase, Cloudflare, Metabase, Higgsfield |
+| Working methods, 10 to 13 | Minimal-code discipline, engineering practice, security by default, Brazilian Portuguese writing |
+| Separate tools, 14 to 19 | Voice transcription, metadata cleaning, skill security scanning, notes, presentations, web scraping |
+
+Each item explains, in plain language, what it does for you, what you need to have before it works, and
+whether it costs anything. Nothing is installed for a service you do not have an account on.
+
+**Does the hard configuration for you.** Anything that needs an API key or a permission comes with a
+direct link to the exact page that creates it. When that is not enough, Claude drives the browser
+through the administrative screens itself, and you only sign in. For Google Workspace that is the
+default path, because the manual route means creating a cloud project, enabling one API per tool, and
+configuring an OAuth client.
+
+Whatever it creates on an outside service, a cloud project, an OAuth client, an access token, is
+created under your own account and carries your name, never the name of whoever handed you this
+file.
+
+**Writes a global instruction file.** At the end it creates or updates `~/.claude/CLAUDE.md`, inside a
+marked block, merging rather than overwriting whatever is already there. The rules it writes depend on
+what actually got installed, so a rule never points at a tool that is not present.
+
+**Records what it did.** The last step writes persistent memories describing the setup, the connections
+and their accounts, the tools and their paths, and anything still pending. Credentials are never written
+into a memory, only which service and which account.
+
+## Requirements
+
+Claude Code, signed in, on Windows or macOS (steps 1 to 4 above). Everything else the runbook
+installs for you if it is missing.
+
+Run it on the strongest setting you have. At the bottom of the box where you type, Claude Code shows
+the model and the effort level. Click there, pick Opus and ultracode. The runbook checks both before it
+touches the machine and walks you through changing them if they are lower, because this is a run that
+installs software and writes configuration, not a chat.
+
+## License
+
+[Apache License 2.0](LICENSE).
